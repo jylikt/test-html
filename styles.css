@@ -1,7 +1,3 @@
 :root {
     --accent-color: #9058ff;
 }
-
-body {
-    background-color: var(--accent-color);
-}
