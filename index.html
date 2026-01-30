@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Учись — платформа обучения</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface-hover: #243044;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-soft: rgba(88, 166, 255, 0.15);
+      --success: #3fb950;
+      --border: #30363d;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: var(--surface-hover);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 0 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .card .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .cta h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-wrap: wrap;
+      }
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <span class="logo">Учись</span>
+      <nav>
+        <a href="#courses">Курсы</a>
+        <a href="#features">Возможности</a>
+        <a href="#start">Начать</a>
+      </nav>
+      <a href="#start" class="btn btn-primary">Войти</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Обучение, которое работает</h1>
+      <p>Практические курсы и проекты. Учись в своём темпе и применяй знания сразу.</p>
+      <a href="#courses" class="btn btn-primary">Смотреть курсы</a>
+    </section>
+
+    <h2 class="section-title" id="courses">Популярные курсы</h2>
+    <section class="courses">
+      <article class="card">
+        <span class="tag">Программирование</span>
+        <h3>Введение в веб-разработку</h3>
+        <p>HTML, CSS, JavaScript — от основ до первого проекта.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Данные</span>
+        <h3>Анализ данных на Python</h3>
+        <p>Pandas, визуализация и базовая статистика.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Дизайн</span>
+        <h3>Интерфейсы и прототипы</h3>
+        <p>Figma, UX-исследования и дизайн-системы.</p>
+      </article>
+    </section>
+
+    <h2 class="section-title" id="features">Почему мы</h2>
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">📚</div>
+        <div>
+          <h3>Структурированные программы</h3>
+          <p>Чёткие шаги от нуля до результата.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div>
+          <h3>Практика в каждом уроке</h3>
+          <p>Задачи и проекты после каждой темы.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🕐</div>
+        <div>
+          <h3>Свой темп</h3>
+          <p>Без дедлайнов — учись когда удобно.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="start">
+      <h2>Готов начать?</h2>
+      <p>Регистрация бесплатна. Первый курс — в подарок.</p>
+      <a href="#" class="btn btn-primary">Зарегистрироваться</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Учись © 2025 — тестовая страница</p>
+  </footer>
+</body>
+</html>
